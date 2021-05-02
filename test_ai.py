@@ -1,12 +1,13 @@
-from deep_emotion_recognition import DeepEmotionRecognizer
-# initialize instance
-# inherited from emotion_recognition.EmotionRecognizer
-# default parameters (LSTM: 128x2, Dense:128x2)
-deeprec = DeepEmotionRecognizer(emotions=['angry', 'sad', 'neutral', 'ps', 'happy'], n_rnn_layers=2, n_dense_layers=1, rnn_units=128, dense_units=128)
+from emotion_recognition import EmotionRecognizer
+from sklearn.svm import SVC
+# init a model, let's use SVC
+my_model = SVC()
+# pass my model to EmotionRecognizer instance
+# and balance the dataset
+rec = EmotionRecognizer(model=my_model, emotions=['sad', 'neutral', 'happy'], balance=True, verbose=0)
 # train the model
-deeprec.train()
-# get the accuracy
-print(deeprec.test_score())
-# predict angry audio sample
-prediction = deeprec.predict('data/validation/Actor_10/03-02-05-02-02-02-10_angry.wav')
-print(f"Prediction: {prediction}")
+rec.train()
+# check the test accuracy for that model
+print("Test score:", rec.test_score())
+# check the train accuracy for that model
+print("Train score:", rec.train_score())
