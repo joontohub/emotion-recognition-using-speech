@@ -6,14 +6,11 @@ from flask import request , redirect, url_for, send_from_directory, jsonify, jso
 from werkzeug.utils import secure_filename
 from PIL import Image
 import base64
-import picture_detector
+#import test_ai
 
-
-
-
-UPLOAD_FOLDER = '../Images'
+# 파이썬에서는 경로 표시할때, 같은 경로이면, ./ 점을 붙혀줘야한다. 안 붙혀주면 오류남
+UPLOAD_FOLDER = './UnityVoices'
 app = Flask(__name__)
-
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif','wav'])
 
@@ -45,18 +42,21 @@ def upload_file():
         file = request.files['file']
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
+            print(filename, "sdfsadf")
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-
             print("activate picture emotion detector")
-            result_emotion, result_prob = picture_detector.Detector()
-            result_prob = str(result_prob)
-            tag = "T"
-            data = tag + result_emotion + tag + result_prob
-            response = app.response_class(
-                response=json.dumps(data),
-                status=200,
-                mimetype='application/json'
-            )
+            #test_ai(UPLOAD_FOLDER + "/" + filename)
+            
+            
+            # result_emotion, result_prob = picture_detector.Detector()
+            # result_prob = str(result_prob)
+            # tag = "T"
+            # data = tag + result_emotion + tag + result_prob
+            # response = app.response_class(
+            #     response=json.dumps(data),
+            #     status=200,
+            #     mimetype='application/json'
+            # )
 
             print( "json data :::: " , response)
             return response
