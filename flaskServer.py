@@ -12,7 +12,7 @@ import base64
 UPLOAD_FOLDER = './UnityVoices'
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif','wav'])
+ALLOWED_EXTENSIONS = set(['wav'])
 
 
 result_emotion = ""

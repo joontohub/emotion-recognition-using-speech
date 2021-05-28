@@ -2,12 +2,13 @@ from emotion_recognition import EmotionRecognizer
 
 import pyaudio
 import os
+import time
 import wave
 from sys import byteorder
 from array import array
 from struct import pack
 from sklearn.ensemble import GradientBoostingClassifier, BaggingClassifier
-
+import os
 from utils import get_best_estimators
 
 THRESHOLD = 500
@@ -17,6 +18,13 @@ RATE = 16000
 
 SILENCE = 30
 
+
+
+pathFile = './UnityVoices/voice_recording.wav'
+
+switch = False
+
+count = 0
 def is_silent(snd_data):
     "Returns 'True' if below the 'silent' threshold"
     return max(snd_data) < THRESHOLD
@@ -155,9 +163,53 @@ if __name__ == "__main__":
     detector = EmotionRecognizer(estimator_dict[args.model], emotions=args.emotions.split(","), features=features, verbose=0)
     detector.train()
     print("Test accuracy score: {:.3f}%".format(detector.test_score()*100))
-    print("Please talk")
+    #print("Please talk")
     
-    filename = "test.wav"
-    record_to_file(filename)
-    result = detector.predict(filename)
-    print(result)
+    #원본
+
+    # filename = "test.wav"
+    # record_to_file(filename)
+    # result = detector.predict(filename)
+    # print(result)
+    
+    
+
+    # 음성데이터 테스트셋
+
+    # files = os.listdir("./KsponSpeech_0001_wav/")
+
+    # for i in files :
+
+
+    #     predict_filename = "./KsponSpeech_0001_wav/" + i
+    #     prediction = detector.predict(predict_filename)
+
+
+    #     print(i)
+        
+    #     print("Prediction:", prediction)
+
+        
+    #     print('-----------------------------------')
+
+
+    #Unity 적용
+    while True:
+        if (os.path.isfile(pathFile) and count == 0):
+            switch = True
+        elif count == 1:
+            print("already activated")
+        else:
+            print("wait")
+
+        if (switch):
+
+            prediction = detector.predict(pathFile)
+            print(prediction)            
+            print("----------------------result------------------- ")
+            switch = False
+            count += 1
+        else:
+            print("doesnt activate")
+        time.sleep(1)
+  
