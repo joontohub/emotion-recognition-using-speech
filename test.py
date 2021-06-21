@@ -167,49 +167,49 @@ if __name__ == "__main__":
     
     #원본
 
-    # filename = "test.wav"
-    # record_to_file(filename)
-    # result = detector.predict(filename)
-    # print(result)
+    filename = "test.wav"
+    record_to_file(filename)
+    result = detector.predict(filename)
+    print(result)
     
     
 
-    # 음성데이터 테스트셋
+    #음성데이터 테스트셋
 
-    # files = os.listdir("./KsponSpeech_0001_wav/")
+    files = os.listdir("./KsponSpeech_0001_wav/")
 
-    # for i in files :
-
-
-    #     predict_filename = "./KsponSpeech_0001_wav/" + i
-    #     prediction = detector.predict(predict_filename)
+    for i in files :
 
 
-    #     print(i)
+        predict_filename = "./KsponSpeech_0001_wav/" + i
+        prediction = detector.predict(predict_filename)
+
+
+        print(i)
         
-    #     print("Prediction:", prediction)
+        print("Prediction:", prediction)
 
-        
-    #     print('-----------------------------------')
+        print(detector.predict_proba(predict_filename))
+        print('-----------------------------------')
 
 
     #Unity 적용
-    while True:
-        if (os.path.isfile(pathFile) and count == 0):
-            switch = True
-        elif count == 1:
-            print("already activated")
-        else:
-            print("wait")
+    # while True:
+    #     if (os.path.isfile(pathFile) and count == 0):
+    #         switch = True
+    #     elif count == 1:
+    #         print("already activated")
+    #     else:
+    #         print("wait")
 
-        if (switch):
+    #     if (switch):
 
-            prediction = detector.predict(pathFile)
-            print(prediction)            
-            print("----------------------result------------------- ")
-            switch = False
-            count += 1
-        else:
-            print("doesnt activate")
-        time.sleep(1)
+    #         prediction = detector.predict(pathFile)
+    #         print(prediction)            
+    #         print("----------------------result------------------- ")
+    #         switch = False
+    #         count += 1
+    #     else:
+    #         print("doesnt activate")
+    #     time.sleep(1)
   

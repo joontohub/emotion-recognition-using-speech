@@ -71,9 +71,9 @@ class DeepEmotionRecognizer(EmotionRecognizer):
         # init EmotionRecognizer
         super().__init__(None, **kwargs)
 
-        self.n_rnn_layers = kwargs.get("n_rnn_layers", 2)
+        self.n_rnn_layers = kwargs.get("n_rnn_layers", 5)
         self.n_dense_layers = kwargs.get("n_dense_layers", 2)
-        self.rnn_units = kwargs.get("rnn_units", 128)
+        self.rnn_units = kwargs.get("rnn_units", 256)
         self.dense_units = kwargs.get("dense_units", 128)
         self.cell = kwargs.get("cell", LSTM)
 

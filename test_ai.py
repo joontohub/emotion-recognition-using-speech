@@ -18,7 +18,7 @@ switch = False
 
 count = 0
 def PredictUnityEmotion():
-    deeprec = DeepEmotionRecognizer(emotions=['angry', 'sad', 'neutral', 'ps', 'happy'], n_rnn_layers=2, n_dense_layers=2, rnn_units=128, dense_units=128)
+    deeprec = DeepEmotionRecognizer(emotions=['neutral', 'happy','sad'], n_rnn_layers=2, n_dense_layers=2, rnn_units=128, dense_units=128)
     # train the model
     deeprec.train()
     # get the accuracy
